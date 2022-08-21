@@ -1,5 +1,5 @@
 # java_aeroporto_trabalho
-Trabalho de Lab. Prog I
+Trabalho de Lab. Prog II
 
 Consiste em obter através de um banco de dados SQL os dados de aeroportos e utilizar-los para descobrir a rota de menor distância entre as diversas conexões.
 Para isso é implementado o algoritmo de Dijkstra.
