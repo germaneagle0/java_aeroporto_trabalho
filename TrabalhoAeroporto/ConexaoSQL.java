@@ -1,9 +1,11 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package TrabalhoAeroporto;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Vector;
-
 
 public class ConexaoSQL {
 
@@ -12,7 +14,7 @@ public class ConexaoSQL {
 
         String connectionUrl = "jdbc:mysql://localhost:3306/aeroporto_java?serverTimezone=UTC";
         String sqlSelectAllPersons = "SELECT * FROM aeroporto_data";
-        try (Connection conn = DriverManager.getConnection(connectionUrl, "root", "password");
+        try (Connection conn = DriverManager.getConnection(connectionUrl, "root", "Germaneagle_12");
              PreparedStatement ps = conn.prepareStatement(sqlSelectAllPersons);
              ResultSet rs = ps.executeQuery();) {
             while (rs.next()) {

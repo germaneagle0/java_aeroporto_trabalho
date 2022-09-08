@@ -1,3 +1,7 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package TrabalhoAeroporto;
 
 import org.apache.commons.text.WordUtils;
@@ -7,8 +11,21 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.PriorityQueue;
 import java.util.Scanner;
+import java.util.Set;
 
 public class Main {
+    static HashMap<String, ArrayList<String[]>> hash_est;
+    static HashMap<String, HashMap<String, Double>> hash;
+    public static void init() {
+        System.out.println("Loading...");
+        ConexaoSQL sql_data = new ConexaoSQL();
+        ArrayList<Aeroporto> aeroportos = sql_data.getConexaoMySQL();
+        
+        System.out.println("Hashing...");
+        hash = set_hash(aeroportos);
+        hash_est = set_hash_localizacao(aeroportos);
+        System.out.println("Finished!");
+    }
     public static void main(String[] args) {
         // Load SQL
         System.out.println("Loading...");
@@ -17,11 +34,21 @@ public class Main {
 
         // Hash Distances
         System.out.println("Hashing...");
-        HashMap<String, HashMap<String, Double>> hash = set_hash(aeroportos);
+        hash = set_hash(aeroportos);
         System.out.println("Finished!");
         press_enter();
-        // Query User Data
+        
         question(hash, aeroportos);
+        // Query User Data
+    }
+    public static Set<String> getEstados() {
+        return hash_est.keySet();
+    }
+    public static ArrayList<String[]> getCidades(String estado) {
+        return hash_est.get(estado);
+    }
+    public static ArrayList<String> getSolution(String iata_origem, String iata_destino) {
+        return dijkstra(iata_origem, iata_destino, hash);
     }
     private static HashMap<String, ArrayList<String[]>> set_hash_localizacao(ArrayList<Aeroporto> arr) {
         HashMap<String, ArrayList<String[]>> result =  new HashMap<>();
@@ -255,6 +282,5 @@ public class Main {
         }
         return hash;
     }
-
-
 }
+

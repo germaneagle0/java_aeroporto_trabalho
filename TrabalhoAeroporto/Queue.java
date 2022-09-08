@@ -1,3 +1,7 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package TrabalhoAeroporto;
 
 public class Queue implements Comparable<Queue> {
@@ -18,3 +22,4 @@ public class Queue implements Comparable<Queue> {
         return 0;
     }
 }
+
