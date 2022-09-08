@@ -221,31 +221,33 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_MunicipioDestinoActionPerformed
 
     private void CalculateRouteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CalculateRouteActionPerformed
-        Resultado.removeAll();
-        String cidade_origem = CidadeOrigem.getSelectedItem().toString();
-        String cidade_destino = CidadeDestino.getSelectedItem().toString();
-        if (cidade_origem.equals(cidade_destino)) {
-            Resultado.setText("Cidades iguais.");
-        }
-        else {
-            String iata_origem = cidade_origem.substring(cidade_origem.indexOf("(")+1, cidade_origem.indexOf(")"));
-            String iata_destino = cidade_destino.substring(cidade_destino.indexOf("(")+1, cidade_destino.indexOf(")"));
-            ArrayList<String> solution = Main.getSolution(iata_origem, iata_destino);
-            Collections.reverse(solution);
-            if (solution.isEmpty()) {
-                Resultado.setText("Rota inacessível.");
+        if (CidadeOrigem.getSelectedItem() != null || CidadeDestino.getSelectedItem() != null) {
+            Resultado.removeAll();
+            String cidade_origem = CidadeOrigem.getSelectedItem().toString();
+            String cidade_destino = CidadeDestino.getSelectedItem().toString();
+            if (cidade_origem.equals(cidade_destino)) {
+                Resultado.setText("Cidades iguais.");
             }
             else {
-                String text="";
-                for (String caminho:solution) {
-                    if (text.isBlank()) {
-                        text = caminho;
-                    }
-                    else {
-                        text = text + " -> " + caminho;
-                    }
+                String iata_origem = cidade_origem.substring(cidade_origem.indexOf("(")+1, cidade_origem.indexOf(")"));
+                String iata_destino = cidade_destino.substring(cidade_destino.indexOf("(")+1, cidade_destino.indexOf(")"));
+                ArrayList<String> solution = Main.getSolution(iata_origem, iata_destino);
+                Collections.reverse(solution);
+                if (solution.isEmpty()) {
+                    Resultado.setText("Rota inacessível.");
                 }
-                Resultado.setText(text);
+                else {
+                    String text="";
+                    for (String caminho:solution) {
+                        if (text.isBlank()) {
+                            text = caminho;
+                        }
+                        else {
+                            text = text + " -> " + caminho;
+                        }
+                    }
+                    Resultado.setText(text);
+                }
             }
         }
     }//GEN-LAST:event_CalculateRouteActionPerformed
