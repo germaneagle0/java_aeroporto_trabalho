@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 
+import TrabalhoAeroporto.ConexaoSQL;
 import TrabalhoAeroporto.Main;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -166,9 +167,9 @@ public class Principal extends javax.swing.JFrame {
                     .addComponent(jLabel7)
                     .addComponent(MunicipioDestino, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(CidadeDestino, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(CidadeDestino, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(CalculateRoute)
@@ -247,6 +248,7 @@ public class Principal extends javax.swing.JFrame {
                         }
                     }
                     Resultado.setText(text);
+                    ConexaoSQL.saveRoute(iata_origem, iata_destino, text);
                 }
             }
         }
@@ -287,7 +289,6 @@ public class Principal extends javax.swing.JFrame {
     }
     private javax.swing.DefaultComboBoxModel getEstados() {
         Set<String> arr = Main.getEstados();
-        
         return new javax.swing.DefaultComboBoxModel<>(arr.toArray());
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -68,13 +68,16 @@ public class Main {
         }
         return result;
     }
-    private static void printSolution(ArrayList<String> solution, int spacer) {
+    private static String printSolution(ArrayList<String> solution, int spacer) {
         System.out.println("Menor caminho não linear: ");
+        String s = new String();
         for (int i = 0; i < solution.size(); i++) {
             int k = solution.size() - i - 1;
             if (i % spacer != 0) {
+                s+=" -> ";
                 System.out.print(" -> ");
             }
+            s+=solution.get(k);
             System.out.print(solution.get(k));
             if (i % spacer == spacer - 1) {
                 System.out.println();
@@ -84,6 +87,7 @@ public class Main {
             System.out.println();
         }
         press_enter();
+        return s;
     }
     private static void show_estados(HashMap<String, ArrayList<String[]>> hash_estados, int spacer) {
         System.out.println("Estados possiveis: ");
@@ -120,7 +124,10 @@ public class Main {
                 continue;
             }
             ArrayList<String> solution = dijkstra(a, b, hash);
-            printSolution(solution, 3);
+            String s = printSolution(solution, 3);
+            System.out.println("Salvando...");
+            ConexaoSQL.saveRoute(a, b, s);
+            System.out.println("Salvo!");
             System.out.println("Gostaria de sair do programa? (s/n)");
             String resp = scan.next().toLowerCase();
             if (resp.equals("s")) {

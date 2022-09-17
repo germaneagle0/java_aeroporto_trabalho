@@ -14,7 +14,7 @@ public class ConexaoSQL {
 
         String connectionUrl = "jdbc:mysql://localhost:3306/aeroporto_java?serverTimezone=UTC";
         String sqlSelectAllPersons = "SELECT * FROM aeroporto_data";
-        try (Connection conn = DriverManager.getConnection(connectionUrl, "root", "Germaneagle_12");
+        try (Connection conn = DriverManager.getConnection(connectionUrl, "root", "password");
              PreparedStatement ps = conn.prepareStatement(sqlSelectAllPersons);
              ResultSet rs = ps.executeQuery();) {
             while (rs.next()) {
@@ -33,6 +33,17 @@ public class ConexaoSQL {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
             return null;
+        }
+    }
+    public static void saveRoute(String iata1, String iata2, String Caminho) {
+        String connectionUrl = "jdbc:mysql://localhost:3306/aeroporto_java?serverTimezone=UTC";
+        String sqlInsertPath = "INSERT INTO destinos (inicio,destino,caminho) VALUES ('"+iata1+"','"+iata2+"','"+Caminho+"');";
+        try (Connection conn = DriverManager.getConnection(connectionUrl, "root", "password");
+             Statement statement = conn.createStatement();
+             ) {
+            statement.executeUpdate(sqlInsertPath);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
         }
     }
 }
